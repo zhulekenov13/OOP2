@@ -7,10 +7,12 @@ public class Patient {
     String name;
     int age;
     MedicalRecord medicalRecord = new MedicalRecord();
-    public Patient(int id, String name, int age){
+    public Patient(int id, String name, int age) throws PatientAgeExeptions{
+        if (age<16) throw new PatientAgeExeptions("Age < 16");
         this.id =id;
         this.name = name;
         this.age = age;
+
     }
 
     public void setId(int id){
@@ -33,7 +35,8 @@ public class Patient {
     }
 
 
-    public void addAllery(String allergy){
+    public void addAllery(String allergy) throws AllergyExeptions{
+        if(medicalRecord.allergies.contains(allergy)) throw new AllergyExeptions("Dublicat");
         medicalRecord.addAllergy(allergy);
     }
 
